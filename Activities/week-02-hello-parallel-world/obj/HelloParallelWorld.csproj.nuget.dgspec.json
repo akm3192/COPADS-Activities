@@ -1,0 +1,67 @@
+{
+  "format": 1,
+  "restore": {
+    "/Users/jsb/Library/CloudStorage/Dropbox/Teaching/2255/CSCI.251/activities/starter-code/week-02-hello-parallel-world/HelloParallelWorld.csproj": {}
+  },
+  "projects": {
+    "/Users/jsb/Library/CloudStorage/Dropbox/Teaching/2255/CSCI.251/activities/starter-code/week-02-hello-parallel-world/HelloParallelWorld.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/jsb/Library/CloudStorage/Dropbox/Teaching/2255/CSCI.251/activities/starter-code/week-02-hello-parallel-world/HelloParallelWorld.csproj",
+        "projectName": "HelloParallelWorld",
+        "projectPath": "/Users/jsb/Library/CloudStorage/Dropbox/Teaching/2255/CSCI.251/activities/starter-code/week-02-hello-parallel-world/HelloParallelWorld.csproj",
+        "packagesPath": "/Users/jsb/.nuget/packages/",
+        "outputPath": "/Users/jsb/Library/CloudStorage/Dropbox/Teaching/2255/CSCI.251/activities/starter-code/week-02-hello-parallel-world/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/jsb/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net9.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net9.0": {
+            "targetAlias": "net9.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.300"
+      },
+      "frameworks": {
+        "net9.0": {
+          "targetAlias": "net9.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.302/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
