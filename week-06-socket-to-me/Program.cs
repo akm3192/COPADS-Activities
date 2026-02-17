@@ -252,6 +252,7 @@ async Task HandleClientAsync(TcpClient tcpClient)
                 {
                     case "time":
                         String time = DateTime.Now.ToString("HH:mm:ss");
+                        Console.WriteLine($"[ {time} ]");
                         break;
                     case "date":
                         break;
