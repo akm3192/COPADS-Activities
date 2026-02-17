@@ -257,7 +257,8 @@ async Task HandleClientAsync(TcpClient tcpClient)
                     case "help":
                         break;
                     case "quit":
-                        break;
+                        Console.WriteLine("Goodbye!");
+                        tcpClient.Client.Disconnect();
                     default:
                         Console.WriteLine("Unknown command.");
                         break;
