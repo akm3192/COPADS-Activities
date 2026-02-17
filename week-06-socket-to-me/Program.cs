@@ -265,6 +265,7 @@ async Task HandleClientAsync(TcpClient tcpClient)
                         Console.WriteLine("  /help  - see list of available commands");
                         Console.WriteLine("  /quit  - disconnect the client");
                         Console.WriteLine();
+                        break;
                     case "quit":
                         Console.WriteLine("Goodbye!");
                         tcpClient.Client.Disconnect();
