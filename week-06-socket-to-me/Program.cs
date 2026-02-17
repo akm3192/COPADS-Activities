@@ -253,6 +253,8 @@ async Task HandleClientAsync(TcpClient tcpClient)
                     case "time":
                         break;
                     case "date":
+                        var now = DateTime.Now.ToString("yyyy-MM-dd");
+                        Console.WriteLine(now);
                         break;
                     case "help":
                         break;
