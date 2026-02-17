@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Ashley\\Documents\\RIT Docs\\Classes\\Term 2 2025-2026\\COPADS\\week-04-lock-it-down\\LockItDown.csproj": {}
+    "C:\\Users\\Ashley\\Documents\\RIT Docs\\Classes\\Term 2 2025-2026\\COPADS-Activities\\Activities\\week-05-deadlock-escape\\DeadlockEscape.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Ashley\\Documents\\RIT Docs\\Classes\\Term 2 2025-2026\\COPADS\\week-04-lock-it-down\\LockItDown.csproj": {
+    "C:\\Users\\Ashley\\Documents\\RIT Docs\\Classes\\Term 2 2025-2026\\COPADS-Activities\\Activities\\week-05-deadlock-escape\\DeadlockEscape.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Ashley\\Documents\\RIT Docs\\Classes\\Term 2 2025-2026\\COPADS\\week-04-lock-it-down\\LockItDown.csproj",
-        "projectName": "LockItDown",
-        "projectPath": "C:\\Users\\Ashley\\Documents\\RIT Docs\\Classes\\Term 2 2025-2026\\COPADS\\week-04-lock-it-down\\LockItDown.csproj",
+        "projectUniqueName": "C:\\Users\\Ashley\\Documents\\RIT Docs\\Classes\\Term 2 2025-2026\\COPADS-Activities\\Activities\\week-05-deadlock-escape\\DeadlockEscape.csproj",
+        "projectName": "DeadlockEscape",
+        "projectPath": "C:\\Users\\Ashley\\Documents\\RIT Docs\\Classes\\Term 2 2025-2026\\COPADS-Activities\\Activities\\week-05-deadlock-escape\\DeadlockEscape.csproj",
         "packagesPath": "C:\\Users\\Ashley\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Ashley\\Documents\\RIT Docs\\Classes\\Term 2 2025-2026\\COPADS\\week-04-lock-it-down\\obj\\",
+        "outputPath": "C:\\Users\\Ashley\\Documents\\RIT Docs\\Classes\\Term 2 2025-2026\\COPADS-Activities\\Activities\\week-05-deadlock-escape\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/maimunaullah/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\Ashley\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net9.0"
@@ -59,7 +59,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.309/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.309/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
