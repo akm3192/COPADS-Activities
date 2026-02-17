@@ -247,6 +247,21 @@ async Task HandleClientAsync(TcpClient tcpClient)
             {
                 // TODO: Implement the command switch statement here
                 // Use message.ToLower() to make commands case-insensitive
+                var command = message.Substring(1).ToLower();
+                switch (command)
+                {
+                    case "time":
+                        break;
+                    case "date":
+                        break;
+                    case "help":
+                        break;
+                    case "quit":
+                        break;
+                    default:
+                        Console.WriteLine("Unknown command.");
+                        break;
+                }
                 await writer.WriteLineAsync($"Command not implemented: {message}");
             }
             else
