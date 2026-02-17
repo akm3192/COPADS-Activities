@@ -251,11 +251,20 @@ async Task HandleClientAsync(TcpClient tcpClient)
                 switch (command)
                 {
                     case "time":
+                        String time = DateTime.Now.ToString("HH:mm:ss");
+                        Console.WriteLine($"[ {time} ]");
                         break;
                     case "date":
+                        var now = DateTime.Now.ToString("yyyy-MM-dd");
+                        Console.WriteLine(now);
                         break;
                     case "help":
-                        break;
+                        Console.WriteLine("\nAvailable Commands:");
+                        Console.WriteLine("  /time  - current server time (HH:mm:ss format)");
+                        Console.WriteLine("  /date  - current date (yyyy-MM-dd format)");
+                        Console.WriteLine("  /help  - see list of available commands");
+                        Console.WriteLine("  /quit  - disconnect the client");
+                        Console.WriteLine();
                     case "quit":
                         Console.WriteLine("Goodbye!");
                         tcpClient.Client.Disconnect();
