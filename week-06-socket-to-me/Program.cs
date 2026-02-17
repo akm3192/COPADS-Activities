@@ -253,7 +253,8 @@ async Task HandleClientAsync(TcpClient tcpClient)
             {
                 // TODO: Q4.1 - Convert to UPPERCASE
                 // TODO: Q4.2 - Add timestamp prefix [HH:mm:ss]
-                string response = message; // Change this!
+                string timestamp = DateTime.Now.ToString("HH:mm:ss");
+                string response = "[" + timestamp+ "] " + message.ToUpper(); // Change this!
                 await writer.WriteLineAsync($"Echo: {response}");
             }
         }

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Ashley\\Documents\\RIT Docs\\Classes\\Term 2 2025-2026\\COPADS\\week-04-lock-it-down\\LockItDown.csproj": {}
+    "C:\\Users\\Ashley\\Documents\\RIT Docs\\Classes\\Term 2 2025-2026\\COPADS-Activities\\Activities\\week-04-lock-it-down\\LockItDown.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Ashley\\Documents\\RIT Docs\\Classes\\Term 2 2025-2026\\COPADS\\week-04-lock-it-down\\LockItDown.csproj": {
+    "C:\\Users\\Ashley\\Documents\\RIT Docs\\Classes\\Term 2 2025-2026\\COPADS-Activities\\Activities\\week-04-lock-it-down\\LockItDown.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Ashley\\Documents\\RIT Docs\\Classes\\Term 2 2025-2026\\COPADS\\week-04-lock-it-down\\LockItDown.csproj",
+        "projectUniqueName": "C:\\Users\\Ashley\\Documents\\RIT Docs\\Classes\\Term 2 2025-2026\\COPADS-Activities\\Activities\\week-04-lock-it-down\\LockItDown.csproj",
         "projectName": "LockItDown",
-        "projectPath": "C:\\Users\\Ashley\\Documents\\RIT Docs\\Classes\\Term 2 2025-2026\\COPADS\\week-04-lock-it-down\\LockItDown.csproj",
+        "projectPath": "C:\\Users\\Ashley\\Documents\\RIT Docs\\Classes\\Term 2 2025-2026\\COPADS-Activities\\Activities\\week-04-lock-it-down\\LockItDown.csproj",
         "packagesPath": "C:\\Users\\Ashley\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Ashley\\Documents\\RIT Docs\\Classes\\Term 2 2025-2026\\COPADS\\week-04-lock-it-down\\obj\\",
+        "outputPath": "C:\\Users\\Ashley\\Documents\\RIT Docs\\Classes\\Term 2 2025-2026\\COPADS-Activities\\Activities\\week-04-lock-it-down\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Ashley\\AppData\\Roaming\\NuGet\\NuGet.Config"

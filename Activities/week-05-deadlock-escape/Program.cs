@@ -1,3 +1,5 @@
+using System.Threading.Tasks;
+
 Console.WriteLine("=== Week 5: Deadlock Escape Room ===");
 Console.WriteLine("Understanding and Preventing Deadlocks\n");
 
@@ -48,7 +50,7 @@ for (int second = 0; second < 10; second++)
 {
     Thread.Sleep(1000);
     int totalMeals = mealsEaten.Sum();
-    Console.WriteLine($"Second {second + 1}: Total meals eaten = {totalMeals}");
+    Console.WriteLine($"Time {second + 1}s: Total meals eaten = {totalMeals}");
 
     if (second > 2 && totalMeals == mealsEaten.Sum())
     {
@@ -91,27 +93,46 @@ Strategy A: Resource Ordering (Break Circular Wait)
 Always acquire forks in consistent order (lower ID first).
 If left fork ID > right fork ID, acquire right first.
 
+
+
 Strategy B: Timeout with Retry (Break Hold and Wait)
 ----------------------------------------------------
-Use Monitor.TryEnter with timeout. If can't get both forks,
-release what you have and try again after random delay.
+Use Monitor.TryEnter with a timeout instead of lock.
+If you can't get both forks, release what you have and retry.
+
+  Reminder: lock (obj) { ... } is shorthand for:
+      Monitor.Enter(obj);
+      try { ... }
+      finally { Monitor.Exit(obj); }
+
+  Monitor.TryEnter(obj, TimeSpan) returns true if the lock was acquired,
+  false if the timeout expired. You must call Monitor.Exit if it returns true.
 
 Strategy C: Limit Diners (Break Circular Wait)
 ---------------------------------------------
-Use a Semaphore to only allow 4 of 5 philosophers to try eating.
+Use a SemaphoreSlim to only allow 4 of 5 philosophers to try eating.
 This guarantees at least one can always get both forks.
 
 Implement your chosen strategy in the FixedPhilosopher method below!
 ");
 
-Console.WriteLine("Press ENTER to test your fix (or the demo fix)...");
+philosophers = new Thread[5];
+for (int i = 0; i < 5; i++)
+{
+    int id = i;
+    philosophers[i] = new Thread(() => NaivePhilosopher(id, forks, mealsEaten, cts.Token));
+    philosophers[i].Start();
+}
+Console.WriteLine("Press ENTER to test your fix...");
 Console.ReadLine();
 
 // Reset and test fixed version
 Array.Clear(mealsEaten);
+for (int i = 0; i < 5; i++)
+    forks[i] = new object();
 cts = new CancellationTokenSource();
 
-Console.WriteLine("Testing fixed version (Resource Ordering)...\n");
+Console.WriteLine("Testing fixed version...\n");
 
 for (int i = 0; i < 5; i++)
 {
@@ -124,7 +145,7 @@ for (int second = 0; second < 10; second++)
 {
     Thread.Sleep(1000);
     int totalMeals = mealsEaten.Sum();
-    Console.WriteLine($"Second {second + 1}: Total meals = {totalMeals} | Per philosopher: [{string.Join(", ", mealsEaten)}]");
+    Console.WriteLine($"Time {second + 1}s: Total meals = {totalMeals} | Per philosopher: [{string.Join(", ", mealsEaten)}]");
 }
 
 cts.Cancel();
@@ -288,33 +309,59 @@ void NaivePhilosopher(int id, object[] forkArray, int[] meals, CancellationToken
     }
 }
 
-void FixedPhilosopher(int id, object[] forkArray, int[] meals, CancellationToken token)
+async Task FixedPhilosopher(int id, object[] forkArray, int[] meals, CancellationToken token)
 {
-    // Strategy A: Resource Ordering - always acquire lower ID first
-    // P0: left=F4, right=F0 → first=F0, second=F4 (breaks circular wait!)
-    // P1: left=F0, right=F1 → first=F0, second=F1
-    // P2: left=F1, right=F2 → first=F1, second=F2
-    // P3: left=F2, right=F3 → first=F2, second=F3
-    // P4: left=F3, right=F4 → first=F3, second=F4
+    // TODO: Implement your chosen strategy here!
+    //
+    // Setup (same for all strategies):
     int leftId = (id + 4) % 5;
     int rightId = id;
-
-    var firstFork = leftId < rightId ? forkArray[leftId] : forkArray[rightId];
-    var secondFork = leftId < rightId ? forkArray[rightId] : forkArray[leftId];
+    var leftFork = forkArray[leftId];
+    var rightFork = forkArray[rightId];
 
     while (!token.IsCancellationRequested)
     {
         // Think
         Thread.Sleep(Random.Shared.Next(10, 50));
 
-        // Eat (DEADLOCK FREE!)
-        lock (firstFork)
+        // TODO: Replace the naive fork acquisition below with your fix.
+        //
+        // Strategy A: Resource Ordering
+        //   Acquire the lower-numbered fork first.
+        //   Hint: use Math.Min/Math.Max on leftId and rightId
+        //
+        // Strategy B: Timeout with Retry
+        //   Use Monitor.TryEnter(fork, TimeSpan.FromMilliseconds(100))
+        //   instead of lock. If it returns false, the timeout expired.
+        //   If it returns true, you MUST call Monitor.Exit in a finally block.
+        //   If you can't get both forks, release and retry after a random delay.
+        //
+        // Strategy C: Limit Diners
+        //   Use a SemaphoreSlim(4) to only allow 4 philosophers to try at once.
+        //   (You'll need to create the semaphore outside this method.)
+
+        // --- Naive version (DEADLOCKS - replace this!) ---
+        
+       var limit= new SemaphoreSlim(4);
+        await limit.WaitAsync();
+
+        try
         {
-            lock (secondFork)
+            lock (leftFork)
             {
+                lock (rightFork)
+                {
+                    //eat
+                    Console.WriteLine($"P{id} eating...");
                 Thread.Sleep(Random.Shared.Next(10, 30));
                 meals[id]++;
+                }
             }
         }
+        finally
+        {
+            limit.Release();
+        }
+
     }
 }
