@@ -255,9 +255,16 @@ async Task HandleClientAsync(TcpClient tcpClient)
                         Console.WriteLine($"[ {time} ]");
                         break;
                     case "date":
+                        var now = DateTime.Now.ToString("yyyy-MM-dd");
+                        Console.WriteLine(now);
                         break;
                     case "help":
-                        break;
+                        Console.WriteLine("\nAvailable Commands:");
+                        Console.WriteLine("  /time  - current server time (HH:mm:ss format)");
+                        Console.WriteLine("  /date  - current date (yyyy-MM-dd format)");
+                        Console.WriteLine("  /help  - see list of available commands");
+                        Console.WriteLine("  /quit  - Exit the application");
+                        Console.WriteLine();
                     case "quit":
                         break;
                     default:
