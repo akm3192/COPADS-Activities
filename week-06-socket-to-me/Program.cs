@@ -263,21 +263,15 @@ async Task HandleClientAsync(TcpClient tcpClient)
                         Console.WriteLine("  /time  - current server time (HH:mm:ss format)");
                         Console.WriteLine("  /date  - current date (yyyy-MM-dd format)");
                         Console.WriteLine("  /help  - see list of available commands");
-<<<<<<< HEAD
+
                         Console.WriteLine("  /quit  - Exit the application");
-                        break;
-=======
-                        Console.WriteLine("  /quit  - disconnect the client");
->>>>>>> 8085566132a0ed523c664bbe315cb31f7fbca280
-                        Console.WriteLine();
-                        break;
+                        break;                        break;
                     case "quit":
-<<<<<<< HEAD
-                        
-=======
+
+
                         Console.WriteLine("Goodbye!");
                         tcpClient.Client.Disconnect(true);
->>>>>>> 8085566132a0ed523c664bbe315cb31f7fbca280
+
                         break;
                     default:
                         Console.WriteLine("Unknown command.");
