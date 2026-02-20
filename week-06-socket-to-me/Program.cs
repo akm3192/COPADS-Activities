@@ -264,8 +264,10 @@ async Task HandleClientAsync(TcpClient tcpClient)
                         Console.WriteLine("  /date  - current date (yyyy-MM-dd format)");
                         Console.WriteLine("  /help  - see list of available commands");
                         Console.WriteLine("  /quit  - Exit the application");
+                        break;
                         Console.WriteLine();
                     case "quit":
+                        
                         break;
                     default:
                         Console.WriteLine("Unknown command.");
