@@ -281,3 +281,9 @@ bool VerifyPassword(string inputPassword, byte[] storedHash)
 
     return false;  // TODO: Implement this
 }
+bool VerifyFileIntegrity(string filepath, string expectedHash){
+    byte[] hash1 = SHA256.HashData(Encoding.UTF8.GetBytes(filepath));
+    bool valid = CryptographicOperations.FixedTimeEquals(hash1, expectedHash);
+    return valid;
+
+}
