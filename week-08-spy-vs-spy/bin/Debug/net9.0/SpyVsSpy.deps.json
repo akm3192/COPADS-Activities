@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v9.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v9.0": {
+      "SpyVsSpy/1.0.0": {
+        "runtime": {
+          "SpyVsSpy.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "SpyVsSpy/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
