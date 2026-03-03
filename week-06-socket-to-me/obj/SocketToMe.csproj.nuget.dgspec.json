@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\grays\\Documents\\COPADS\\COPADS-Activities\\week-06-socket-to-me\\SocketToMe.csproj": {}
+    "C:\\Users\\Ashley\\Documents\\RIT Docs\\Classes\\Term 2 2025-2026\\COPADS-Activities\\week-06-socket-to-me\\SocketToMe.csproj": {}
   },
   "projects": {
-    "C:\\Users\\grays\\Documents\\COPADS\\COPADS-Activities\\week-06-socket-to-me\\SocketToMe.csproj": {
+    "C:\\Users\\Ashley\\Documents\\RIT Docs\\Classes\\Term 2 2025-2026\\COPADS-Activities\\week-06-socket-to-me\\SocketToMe.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\grays\\Documents\\COPADS\\COPADS-Activities\\week-06-socket-to-me\\SocketToMe.csproj",
+        "projectUniqueName": "C:\\Users\\Ashley\\Documents\\RIT Docs\\Classes\\Term 2 2025-2026\\COPADS-Activities\\week-06-socket-to-me\\SocketToMe.csproj",
         "projectName": "SocketToMe",
-        "projectPath": "C:\\Users\\grays\\Documents\\COPADS\\COPADS-Activities\\week-06-socket-to-me\\SocketToMe.csproj",
-        "packagesPath": "C:\\Users\\grays\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\grays\\Documents\\COPADS\\COPADS-Activities\\week-06-socket-to-me\\obj\\",
+        "projectPath": "C:\\Users\\Ashley\\Documents\\RIT Docs\\Classes\\Term 2 2025-2026\\COPADS-Activities\\week-06-socket-to-me\\SocketToMe.csproj",
+        "packagesPath": "C:\\Users\\Ashley\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Ashley\\Documents\\RIT Docs\\Classes\\Term 2 2025-2026\\COPADS-Activities\\week-06-socket-to-me\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\grays\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config"
+          "C:\\Users\\Ashley\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net9.0"
@@ -40,9 +36,9 @@
         "restoreAuditProperties": {
           "enableAudit": "true",
           "auditLevel": "low",
-          "auditMode": "all"
+          "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.100"
+        "SdkAnalysisLevel": "9.0.300"
       },
       "frameworks": {
         "net9.0": {
@@ -63,7 +59,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Users\\grays\\.dotnet\\sdk\\9.0.100/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.309/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
