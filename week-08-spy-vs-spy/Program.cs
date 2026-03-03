@@ -106,8 +106,8 @@ Hashing is different from encryption:
 Uses: Password storage, data integrity, digital signatures
 ");
 
-string password = "MySecretPassword123";
-string password2 = "MySecretPassword124";  // One character different
+string password = "hello";
+string password2 = "hello!";  // One character different
 
 byte[] hash1 = SHA256.HashData(Encoding.UTF8.GetBytes(password));
 byte[] hash2 = SHA256.HashData(Encoding.UTF8.GetBytes(password2));
@@ -278,6 +278,7 @@ bool VerifyPassword(string inputPassword, byte[] storedHash)
 {
     // Hash the input password and compare to stored hash
     // Return true if they match
-
-    return false;  // TODO: Implement this
+    var hashPw = SHA256.HashData(Encoding.UTF8.GetBytes(inputPassword));
+    return hashPw.SequenceEqual(storedHash);
 }
+
