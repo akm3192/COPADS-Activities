@@ -1,8 +1,14 @@
 {
   "version": 2,
+<<<<<<< HEAD
   "dgSpecHash": "Y5zhaY7owyk=",
   "success": true,
   "projectFilePath": "C:\\Users\\Ashley\\Documents\\RIT Docs\\Classes\\Term 2 2025-2026\\COPADS\\COPADS-Activities\\week-08-spy-vs-spy\\SpyVsSpy.csproj",
+=======
+  "dgSpecHash": "7eyApM4izXY=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\grays\\Documents\\COPADS\\COPADS-Activities\\week-08-spy-vs-spy\\SpyVsSpy.csproj",
+>>>>>>> 15473d7a6621d21c103d58037d1078f25fbaeddb
   "expectedPackageFiles": [],
   "logs": []
 }

@@ -107,8 +107,8 @@ Hashing is different from encryption:
 Uses: Password storage, data integrity, digital signatures
 ");
 
-string password = "MySecretPassword123";
-string password2 = "MySecretPassword124";  // One character different
+string password = "hello";
+string password2 = "hello!";  // One character different
 
 byte[] hash1 = SHA256.HashData(Encoding.UTF8.GetBytes(password));
 byte[] hash2 = SHA256.HashData(Encoding.UTF8.GetBytes(password2));
@@ -303,15 +303,9 @@ string CrackCaesar(string ciphertext)
 // TODO: Implement password verification
 bool VerifyPassword(string inputPassword, byte[] storedHash)
 {
-    byte[] hash1 = SHA256.HashData(Encoding.UTF8.GetBytes(inputPassword));
-    bool valid = CryptographicOperations.FixedTimeEquals(hash1, storedHash);
-    return valid;
+    // Hash the input password and compare to stored hash
+    // Return true if they match
 
-     // TODO: Implement this
+    return false;  // TODO: Implement this
 }
-bool VerifyFileIntegrity(string filepath, string expectedHash){
-    byte[] hash1 = SHA256.HashData(Encoding.UTF8.GetBytes(filepath));
-    bool valid = CryptographicOperations.FixedTimeEquals(hash1, Encoding.UTF8.GetBytes(expectedHash));
-    return valid;
 
-}

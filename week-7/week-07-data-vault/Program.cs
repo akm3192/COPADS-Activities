@@ -100,10 +100,16 @@ async Task SimulateSingleClient(int serverPort)
             "GET nonexistent",
             "SET greeting Hello World",
             "GET greeting",
+<<<<<<< HEAD
             "KEYS",
             "DEL name",
             "EXISTS name",
             "KEYS"
+=======
+            "COUNT",
+            "CLEAR",
+            "APPEND greeting World"
+>>>>>>> 15473d7a6621d21c103d58037d1078f25fbaeddb
         ];
 
         foreach (var cmd in commands)
@@ -353,16 +359,21 @@ public class KeyValueServer
                 "GET" when parts.Length >= 2 => Get(parts[1]),
                 "GET" => "ERROR: Usage: GET key",
                 "QUIT" => null,
+<<<<<<< HEAD
                 "DEL" when parts.Length >= 2 => Del(parts[1]),
                 "EXISTS" when parts.Length >= 2 => Exists(parts[1]),
                 "KEYS" => Keys(),
+=======
+                
+
+>>>>>>> 15473d7a6621d21c103d58037d1078f25fbaeddb
                 // TODO (Part 4): Implement these commands
                 // "DEL" when parts.Length >= 2 => Del(parts[1]),
                 // "EXISTS" when parts.Length >= 2 => Exists(parts[1]),
                 // "KEYS" => Keys(),
-                // "COUNT" => Count(),
-                // "CLEAR" => Clear(),
-                // "APPEND" when parts.Length >= 3 => Append(parts[1], parts[2]),
+                "COUNT" => Count(),
+                "CLEAR" => Clear(),
+                "APPEND" when parts.Length >= 3 => Append(parts[1], parts[2]),
 
                 // TODO (Part 5): Implement INCR
                 // "INCR" when parts.Length >= 2 => Incr(parts[1]),
@@ -421,21 +432,26 @@ public class KeyValueServer
         // Return all keys, one per line, or "(empty)" if none
     }
 
-    // private string Count()
-    // {
-    //     // Return number of stored keys
-    // }
+    private string Count()
+    {
+        // Return number of stored keys
+        return _store.Count().ToString();    
+    }
 
-    // private string Clear()
-    // {
-    //     // Remove all keys, return OK
-    // }
+    private string Clear()
+    {
+        // Remove all keys, return OK
+        _store.Clear();
+        return "OK";
+    }
 
-    // private string Append(string key, string value)
-    // {
-    //     // Append value to existing key (or create if new)
-    //     // Return the new string length
-    // }
+    private string Append(string key, string value)
+    {
+        // Append value to existing key (or create if new)
+        // Return the new string length
+        _store.AddOrUpdate(key, value, (oldKey, oldValue) => oldValue + value);
+        return Get(key).Length.ToString();
+    }
 
     // TODO (Part 5): Implement INCR
     // WARNING: The naive approach has a race condition!
