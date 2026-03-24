@@ -106,8 +106,8 @@ Hashing is different from encryption:
 Uses: Password storage, data integrity, digital signatures
 ");
 
-string password = "MySecretPassword123";
-string password2 = "MySecretPassword124";  // One character different
+string password = "hello";
+string password2 = "Hello";  // One character different
 
 byte[] hash1 = SHA256.HashData(Encoding.UTF8.GetBytes(password));
 byte[] hash2 = SHA256.HashData(Encoding.UTF8.GetBytes(password2));
