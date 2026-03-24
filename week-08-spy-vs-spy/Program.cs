@@ -1,3 +1,4 @@
+using System.Linq.Expressions;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -164,6 +165,7 @@ Console.WriteLine($"Success:   {testPlain == testDecrypted}\n");
 string intercepted = "WKLV LV D VHFUHW PHVVDJH";
 Console.WriteLine($"Intercepted message: {intercepted}");
 Console.WriteLine("Can you crack it? (Hint: try CrackCaesar method)\n");
+CrackCaesar(intercepted);
 
 // ============================================
 // PART 6: Discussion Questions
@@ -242,8 +244,10 @@ string CaesarEncrypt(string plaintext, int shiftAmount)
     {
         if (c >= 'A' && c <= 'Z')
         {
+            int shifted = (c+ shiftAmount- 'A')%26 + 'A'; 
+            char newChar = (char) shifted; 
             // TODO: Implement the shift logic
-            result.Append(c);  // Replace this with shifted character
+            result.Append(newChar);  // Replace this with shifted character
         }
         else
         {
@@ -259,8 +263,26 @@ string CaesarDecrypt(string ciphertext, int shiftAmount)
 {
     // Hint: Decryption is just encryption with negative shift
     // Or shift by (26 - shiftAmount)
+     var result = new StringBuilder();
 
-    return ciphertext;  // TODO: Implement this
+    foreach (char c in ciphertext)
+    {
+        if (c >= 'A' && c <= 'Z')
+        {
+            int shifted = (c- shiftAmount+26)%26 + 'A'; 
+            char newChar = (char) shifted; 
+            // TODO: Implement the shift logic
+            result.Append(newChar);  // Replace this with shifted character
+        }
+        else
+        {
+            result.Append(c);  // Keep non-letters unchanged
+        }
+    }
+
+    return result.ToString();
+
+  // TODO: Implement this
 }
 
 // TODO: Implement Caesar cipher cracker
@@ -269,6 +291,11 @@ string CrackCaesar(string ciphertext)
     // Try all 26 possible shifts
     // Return the one that looks like readable English
     // Hint: Look for common words like "THE", "AND", "IS"
+    for(int i=1; i < 27; i++)
+    {
+        String tryPlain = CaesarDecrypt(ciphertext, i);
+        Console.WriteLine($"Try {i}: {tryPlain}");
+    }
 
     return ciphertext;  // TODO: Implement this
 }
@@ -276,14 +303,15 @@ string CrackCaesar(string ciphertext)
 // TODO: Implement password verification
 bool VerifyPassword(string inputPassword, byte[] storedHash)
 {
-    // Hash the input password and compare to stored hash
-    // Return true if they match
+    byte[] hash1 = SHA256.HashData(Encoding.UTF8.GetBytes(inputPassword));
+    bool valid = CryptographicOperations.FixedTimeEquals(hash1, storedHash);
+    return valid;
 
-    return false;  // TODO: Implement this
+     // TODO: Implement this
 }
 bool VerifyFileIntegrity(string filepath, string expectedHash){
     byte[] hash1 = SHA256.HashData(Encoding.UTF8.GetBytes(filepath));
-    bool valid = CryptographicOperations.FixedTimeEquals(hash1, expectedHash);
+    bool valid = CryptographicOperations.FixedTimeEquals(hash1, Encoding.UTF8.GetBytes(expectedHash));
     return valid;
 
 }

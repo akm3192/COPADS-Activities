@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("DataVault")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a9f736f815c17d5ad7fddc9c0d92ade7b98ec198")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4b6e8a6bf01c98b635816ddd6add34deb60c7131")]
 [assembly: System.Reflection.AssemblyProductAttribute("DataVault")]
 [assembly: System.Reflection.AssemblyTitleAttribute("DataVault")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

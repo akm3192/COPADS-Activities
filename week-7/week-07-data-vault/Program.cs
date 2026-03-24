@@ -1,5 +1,6 @@
 using System.Collections.Concurrent;
 using System.Net;
+using System.Net.Http.Headers;
 using System.Net.Sockets;
 
 Console.WriteLine("=== Week 7: Data Vault ===");
@@ -99,6 +100,10 @@ async Task SimulateSingleClient(int serverPort)
             "GET nonexistent",
             "SET greeting Hello World",
             "GET greeting",
+            "KEYS",
+            "DEL name",
+            "EXISTS name",
+            "KEYS"
         ];
 
         foreach (var cmd in commands)
@@ -348,7 +353,9 @@ public class KeyValueServer
                 "GET" when parts.Length >= 2 => Get(parts[1]),
                 "GET" => "ERROR: Usage: GET key",
                 "QUIT" => null,
-
+                "DEL" when parts.Length >= 2 => Del(parts[1]),
+                "EXISTS" when parts.Length >= 2 => Exists(parts[1]),
+                "KEYS" => Keys(),
                 // TODO (Part 4): Implement these commands
                 // "DEL" when parts.Length >= 2 => Del(parts[1]),
                 // "EXISTS" when parts.Length >= 2 => Exists(parts[1]),
@@ -382,20 +389,37 @@ public class KeyValueServer
 
     // TODO (Part 4): Implement these methods
 
-    // private string Del(string key)
-    // {
-    //     // Remove key, return (1) if removed, (0) if not found
-    // }
+    private string Del(string key)
+    {
+        return _store.TryRemove(key, out _) ? "(1)": "(0)";
+        
+    }
 
-    // private string Exists(string key)
-    // {
-    //     // Return (true) or (false)
-    // }
+    private string Exists(string key)
+    {
+        String value;
+        if(_store.TryGetValue(key, out value))
+        {
+            return "(true)";
+        }// Remove key, return (1) if removed, (0) if not found
+        return "(false)";
+        // Return (true) or (false)
+    }
 
-    // private string Keys()
-    // {
-    //     // Return all keys, one per line, or "(empty)" if none
-    // }
+    private string Keys()
+    {
+        if (_store.IsEmpty)
+        {
+            return "(empty)";
+        }
+        else
+        {
+            List<String> keys = _store.Keys.ToList();
+            return string.Join("\n", keys);;
+        }
+        
+        // Return all keys, one per line, or "(empty)" if none
+    }
 
     // private string Count()
     // {

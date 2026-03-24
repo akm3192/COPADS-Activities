@@ -74,34 +74,16 @@ TASK 2.1: Calculate delays (baseDelay = 1000ms):
 Total max wait after 5 attempts: _____ ms
 ");
 
-Console.WriteLine("Attempting to send with exponential backoff (baseDelay = 1000ms)...\n");
+Console.WriteLine("Attempting to send with exponential backoff...\n");
+Console.WriteLine("Using ReliableClient (see Part 5) to send with retry + backoff:\n");
 
-int maxRetries = 5;
-int baseDelayMs = 1000;
+var reliableClient = new ReliableClient(betterNetwork, maxRetries: 5, baseDelayMs: 1000);
+var (success, response) = await reliableClient.SendReliablyAsync("Important message");
 
-for (int attempt = 0; attempt <= maxRetries; attempt++)
-{
-    var result = await betterNetwork.SendAsync("Important message");
-
-    if (result.Count > 0)
-    {
-        Console.WriteLine($"  Attempt {attempt + 1}: SUCCESS!");
-        break;
-    }
-    else
-    {
-        int delayMs = baseDelayMs * (1 << attempt); // 2^attempt
-        int jitter = Random.Shared.Next(0, delayMs / 4);
-        int totalDelay = delayMs + jitter;
-
-        Console.WriteLine($"  Attempt {attempt + 1}: FAILED, waiting {totalDelay}ms before retry...");
-
-        if (attempt < maxRetries)
-            await Task.Delay(totalDelay);
-        else
-            Console.WriteLine("  Max retries exceeded. Giving up.");
-    }
-}
+if (success)
+    Console.WriteLine($"\n  Result: Delivered successfully!");
+else
+    Console.WriteLine($"\n  Result: Failed after all retries.");
 
 // ============================================
 // PART 3: Idempotency - Safe Retries
@@ -129,20 +111,27 @@ Key technique: Request IDs
 - Duplicate requests return cached response
 ");
 
-var bank = new IdempotentBankService();
+var bank = new IdempotentService();
 
 string requestId = Guid.NewGuid().ToString();
 Console.WriteLine($"Request ID: {requestId}");
 Console.WriteLine();
 
-// Simulate duplicate requests (network retried)
+// Simulate duplicate requests (network retried the same logical request)
+// Once you implement IdempotentService.ProcessRequest, the balance
+// should only increase ONCE despite 3 calls with the same request ID.
+var depositRequest = new Request("deposit", 100m);
 for (int i = 1; i <= 3; i++)
 {
-    decimal result = bank.ProcessDeposit(requestId, 100m);
-    Console.WriteLine($"Deposit attempt {i}: Balance = ${result}");
+    var result = bank.ProcessRequest(requestId, depositRequest);
+    Console.WriteLine($"Deposit attempt {i}: Balance = ${result.Balance}");
 }
 
-Console.WriteLine("\nNotice: Balance only increased once despite 3 'requests'!");
+// Now try a NEW request (different ID) — this one SHOULD increase the balance
+string requestId2 = Guid.NewGuid().ToString();
+var result2 = bank.ProcessRequest(requestId2, new Request("deposit", 50m));
+Console.WriteLine($"\nNew request (different ID): Balance = ${result2.Balance}");
+Console.WriteLine("Duplicates rejected, new requests processed — that's idempotency!");
 
 // ============================================
 // PART 4: Timeouts and Partial Failures
@@ -168,6 +157,22 @@ This is why:
 - We need consensus protocols (Paxos, Raft)
 - Distributed systems are hard!
 ");
+
+var slowNetwork = new UnreliableNetwork(packetLossRate: 0.3, duplicationRate: 0, maxDelayMs: 3000);
+var timeoutClient = new ReliableClient(slowNetwork);
+
+Console.WriteLine("Sending with 1-second timeout over a slow network (up to 3s delay)...\n");
+
+for (int i = 1; i <= 5; i++)
+{
+    var (ok, msg) = await timeoutClient.SendWithTimeoutAsync($"Request {i}", timeoutMs: 1000);
+    if (ok)
+        Console.WriteLine($"  Request {i}: SUCCESS");
+    else
+        Console.WriteLine($"  Request {i}: TIMEOUT — did the server process it? We don't know!");
+}
+
+Console.WriteLine("\nThis ambiguity is why idempotency matters — it makes retries safe.");
 
 // ============================================
 // PART 5: YOUR TASK
@@ -285,28 +290,28 @@ public class UnreliableNetwork
     }
 }
 
-public class IdempotentBankService
+public record Request(string Operation, decimal Amount);
+public record Response(decimal Balance, bool WasDuplicate);
+
+// TODO: Implement this class
+// Part 3 calls ProcessRequest — it won't behave correctly until you implement it.
+public class IdempotentService
 {
     private decimal _balance = 1000m;
-    private readonly System.Collections.Concurrent.ConcurrentDictionary<string, decimal> _processedRequests = new();
+    private readonly System.Collections.Concurrent.ConcurrentDictionary<string, Response> _processedRequests = new();
 
-    public decimal ProcessDeposit(string requestId, decimal amount)
+    public Response ProcessRequest(string requestId, Request request)
     {
-        // Check if we've already processed this request
-        if (_processedRequests.TryGetValue(requestId, out decimal cachedResult))
-        {
-            Console.WriteLine($"  [Server] Duplicate request {requestId[..8]}... returning cached result");
-            return cachedResult;
-        }
-
-        // Process the deposit
-        _balance += amount;
-
-        // Cache the result
-        _processedRequests[requestId] = _balance;
-        Console.WriteLine($"  [Server] Processed new request {requestId[..8]}...");
-
-        return _balance;
+        // TODO: Make this idempotent using the requestId!
+        // 1. Check if requestId is already in _processedRequests
+        //    - If yes: print "Duplicate request", return the cached Response
+        //    - If no: process the deposit (add request.Amount to _balance),
+        //      cache a new Response in _processedRequests, and return it
+        //
+        // Without idempotency, every call blindly adds to the balance:
+        _balance += request.Amount;
+        Console.WriteLine($"  [Server] Processed request {requestId[..8]}...");
+        return new Response(_balance, WasDuplicate: false);
     }
 }
 
@@ -325,22 +330,37 @@ public class ReliableClient
     }
 
     // TODO: Implement reliable send with exponential backoff
+    // This is where the retry loop with backoff goes!
+    // Part 2 calls this method — it won't work until you implement it.
     public async Task<(bool success, string? response)> SendReliablyAsync(string message)
     {
-        // 1. Generate request ID
-        // 2. Attempt to send with retries
-        // 3. Use exponential backoff between retries
-        // 4. Return success/failure
+        // 1. Generate a request ID (for idempotency — see Part 3)
+        // 2. Loop from attempt = 0 to _maxRetries:
+        //    a. Try sending via _network.SendAsync(message)
+        //    b. If result.Count > 0, return (true, result[0].message)
+        //    c. If failed and attempts remain:
+        //       - Calculate delay: _baseDelayMs * (2 ^ attempt)
+        //       - Add jitter: random 0-25% of delay
+        //       - await Task.Delay(delay + jitter)
+        //       - Print the attempt number and wait time
+        // 3. If all retries exhausted, return (false, null)
 
-        return (false, null);  // TODO: Implement
+        return (false, null);  // Replace this with your implementation
     }
 
     // TODO: Implement send with timeout
+    // Part 4 calls this method — it won't work until you implement it.
     public async Task<(bool success, string? response)> SendWithTimeoutAsync(string message, int timeoutMs)
     {
-        // Use CancellationTokenSource to implement timeout
-        // Distinguish between "failed" and "timed out" (unknown status)
+        // 1. Create a CancellationTokenSource with the timeout:
+        //    using var cts = new CancellationTokenSource(TimeSpan.FromMilliseconds(timeoutMs));
+        // 2. Try sending via _network.SendAsync(message) — but race it against the timeout.
+        //    Hint: use Task.WhenAny with _network.SendAsync and Task.Delay(timeoutMs, cts.Token)
+        //    OR wrap the send in a try/catch for OperationCanceledException
+        // 3. If the send completes before timeout and has results, return (true, result[0].message)
+        // 4. If timeout fires first, return (false, null)
+        //    Note: the server may STILL process the request — we just don't know!
 
-        return (false, null);  // TODO: Implement
+        return (false, null);  // Replace this with your implementation
     }
 }
