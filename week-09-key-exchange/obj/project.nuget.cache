@@ -1,0 +1,14 @@
+{
+  "version": 2,
+<<<<<<< HEAD
+  "dgSpecHash": "MwJmtkVe2zw=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Ashley\\Documents\\RIT Docs\\Classes\\Term 2 2025-2026\\COPADS\\COPADS-Activities\\week-09-key-exchange\\KeyExchange.csproj",
+=======
+  "dgSpecHash": "zyG+PXMi/5Q=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\grays\\Documents\\COPADS\\COPADS-Activities\\week-09-key-exchange\\KeyExchange.csproj",
+>>>>>>> 15473d7a6621d21c103d58037d1078f25fbaeddb
+  "expectedPackageFiles": [],
+  "logs": []
+}

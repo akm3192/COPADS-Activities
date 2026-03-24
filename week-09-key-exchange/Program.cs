@@ -258,6 +258,10 @@ Console.WriteLine(@"
    _______________________________________________________________
 ");
 
+Console.WriteLine("--- TEST ---\n");
+SecureChannel secureChannel = new SecureChannel();
+
+
 // ============================================
 // Summary
 // ============================================
@@ -291,11 +295,14 @@ public class SecureChannel
     // TODO: Complete this method
     public void DeriveSharedKey(byte[] otherPartyPublicKey)
     {
+        using var deriveKey = ECDiffieHellman.Create();
+        deriveKey.ImportSubjectPublicKeyInfo(otherPartyPublicKey, out _);
+
+        byte[] _sharedKey = _ecdh.DeriveKeyMaterial(deriveKey.PublicKey);
         // 1. Import the other party's public key
         // 2. Derive the shared key material
         // 3. Store it in _sharedKey (use first 32 bytes for AES-256)
 
-        throw new NotImplementedException("TODO: Implement DeriveSharedKey");
     }
 
     // TODO: Complete this method
@@ -303,12 +310,26 @@ public class SecureChannel
     {
         if (_sharedKey == null)
             throw new InvalidOperationException("Key not yet derived");
+        using Aes aes = Aes.Create();
+       
+        aes.GenerateIV();
+        Byte[] iv = aes.IV;
+        aes.Key = _sharedKey;
+
+        using ICryptoTransform encryptor = aes.CreateEncryptor();
+        using MemoryStream ms = new MemoryStream();
+        using CryptoStream cs = new CryptoStream(ms, encryptor, CryptoStreamMode.Write);
+
+        Byte[] messageBytes = Encoding.UTF8.GetBytes(message);
+        cs.Write(messageBytes, 0, message.Length);
+
+        cs.FlushFinalBlock();
+        return ms.ToArray();
+
 
         // 1. Generate random IV
         // 2. Encrypt message with AES using _sharedKey
         // 3. Return IV + ciphertext concatenated
-
-        return Array.Empty<byte>();  // TODO: Implement
     }
 
     // TODO: Complete this method
@@ -317,11 +338,22 @@ public class SecureChannel
         if (_sharedKey == null)
             throw new InvalidOperationException("Key not yet derived");
 
+        byte[] first16Bytes = new byte[16];
+        Array.Copy(encryptedData, 0, first16Bytes, 0, 16);
+        
+        using Aes aes = Aes.Create();
+        aes.Key = _sharedKey;
+        aes.IV = first16Bytes;
+        using ICryptoTransform decryptor = aes.CreateDecryptor();
+        using MemoryStream ms = new MemoryStream(encryptedData[16..]);
+        using CryptoStream cs = new CryptoStream(ms, decryptor,
+        CryptoStreamMode.Read);
+        using MemoryStream output = new MemoryStream();
+        cs.CopyTo(output);
+        return output.ToString(); 
         // 1. Extract IV (first 16 bytes)
         // 2. Extract ciphertext (remaining bytes)
         // 3. Decrypt with AES using _sharedKey
         // 4. Return plaintext string
-
-        return "";  // TODO: Implement
     }
 }

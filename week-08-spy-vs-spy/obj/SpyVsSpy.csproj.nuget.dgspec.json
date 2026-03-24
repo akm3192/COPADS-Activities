@@ -1,0 +1,98 @@
+{
+  "format": 1,
+  "restore": {
+<<<<<<< HEAD
+    "C:\\Users\\Ashley\\Documents\\RIT Docs\\Classes\\Term 2 2025-2026\\COPADS\\COPADS-Activities\\week-08-spy-vs-spy\\SpyVsSpy.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\Ashley\\Documents\\RIT Docs\\Classes\\Term 2 2025-2026\\COPADS\\COPADS-Activities\\week-08-spy-vs-spy\\SpyVsSpy.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Ashley\\Documents\\RIT Docs\\Classes\\Term 2 2025-2026\\COPADS\\COPADS-Activities\\week-08-spy-vs-spy\\SpyVsSpy.csproj",
+        "projectName": "SpyVsSpy",
+        "projectPath": "C:\\Users\\Ashley\\Documents\\RIT Docs\\Classes\\Term 2 2025-2026\\COPADS\\COPADS-Activities\\week-08-spy-vs-spy\\SpyVsSpy.csproj",
+        "packagesPath": "C:\\Users\\Ashley\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Ashley\\Documents\\RIT Docs\\Classes\\Term 2 2025-2026\\COPADS\\COPADS-Activities\\week-08-spy-vs-spy\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Ashley\\AppData\\Roaming\\NuGet\\NuGet.Config"
+=======
+    "C:\\Users\\grays\\Documents\\COPADS\\COPADS-Activities\\week-08-spy-vs-spy\\SpyVsSpy.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\grays\\Documents\\COPADS\\COPADS-Activities\\week-08-spy-vs-spy\\SpyVsSpy.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\grays\\Documents\\COPADS\\COPADS-Activities\\week-08-spy-vs-spy\\SpyVsSpy.csproj",
+        "projectName": "SpyVsSpy",
+        "projectPath": "C:\\Users\\grays\\Documents\\COPADS\\COPADS-Activities\\week-08-spy-vs-spy\\SpyVsSpy.csproj",
+        "packagesPath": "C:\\Users\\grays\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\grays\\Documents\\COPADS\\COPADS-Activities\\week-08-spy-vs-spy\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\grays\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config"
+>>>>>>> 15473d7a6621d21c103d58037d1078f25fbaeddb
+        ],
+        "originalTargetFrameworks": [
+          "net9.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net9.0": {
+            "targetAlias": "net9.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+<<<<<<< HEAD
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.300"
+=======
+          "auditMode": "all"
+        },
+        "SdkAnalysisLevel": "9.0.100"
+>>>>>>> 15473d7a6621d21c103d58037d1078f25fbaeddb
+      },
+      "frameworks": {
+        "net9.0": {
+          "targetAlias": "net9.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+<<<<<<< HEAD
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.309/PortableRuntimeIdentifierGraph.json"
+=======
+          "runtimeIdentifierGraphPath": "C:\\Users\\grays\\.dotnet\\sdk\\9.0.100/PortableRuntimeIdentifierGraph.json"
+>>>>>>> 15473d7a6621d21c103d58037d1078f25fbaeddb
+        }
+      }
+    }
+  }
+}

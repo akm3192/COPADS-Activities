@@ -1,0 +1,15 @@
+C:\Users\grays\Documents\COPADS\COPADS-Activities\week-05-deadlock-escape\bin\Debug\net9.0\DeadlockEscape.exe
+C:\Users\grays\Documents\COPADS\COPADS-Activities\week-05-deadlock-escape\bin\Debug\net9.0\DeadlockEscape.deps.json
+C:\Users\grays\Documents\COPADS\COPADS-Activities\week-05-deadlock-escape\bin\Debug\net9.0\DeadlockEscape.runtimeconfig.json
+C:\Users\grays\Documents\COPADS\COPADS-Activities\week-05-deadlock-escape\bin\Debug\net9.0\DeadlockEscape.dll
+C:\Users\grays\Documents\COPADS\COPADS-Activities\week-05-deadlock-escape\bin\Debug\net9.0\DeadlockEscape.pdb
+C:\Users\grays\Documents\COPADS\COPADS-Activities\week-05-deadlock-escape\obj\Debug\net9.0\DeadlockEscape.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\grays\Documents\COPADS\COPADS-Activities\week-05-deadlock-escape\obj\Debug\net9.0\DeadlockEscape.AssemblyInfoInputs.cache
+C:\Users\grays\Documents\COPADS\COPADS-Activities\week-05-deadlock-escape\obj\Debug\net9.0\DeadlockEscape.AssemblyInfo.cs
+C:\Users\grays\Documents\COPADS\COPADS-Activities\week-05-deadlock-escape\obj\Debug\net9.0\DeadlockEscape.csproj.CoreCompileInputs.cache
+C:\Users\grays\Documents\COPADS\COPADS-Activities\week-05-deadlock-escape\obj\Debug\net9.0\DeadlockEscape.sourcelink.json
+C:\Users\grays\Documents\COPADS\COPADS-Activities\week-05-deadlock-escape\obj\Debug\net9.0\DeadlockEscape.dll
+C:\Users\grays\Documents\COPADS\COPADS-Activities\week-05-deadlock-escape\obj\Debug\net9.0\refint\DeadlockEscape.dll
+C:\Users\grays\Documents\COPADS\COPADS-Activities\week-05-deadlock-escape\obj\Debug\net9.0\DeadlockEscape.pdb
+C:\Users\grays\Documents\COPADS\COPADS-Activities\week-05-deadlock-escape\obj\Debug\net9.0\DeadlockEscape.genruntimeconfig.cache
+C:\Users\grays\Documents\COPADS\COPADS-Activities\week-05-deadlock-escape\obj\Debug\net9.0\ref\DeadlockEscape.dll
