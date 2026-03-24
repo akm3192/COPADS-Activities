@@ -302,6 +302,19 @@ public class IdempotentService
 
     public Response ProcessRequest(string requestId, Request request)
     {
+        if (_processedRequests.ContainsKey(requestId))
+        {
+            return _processedRequests[requestId];
+        }
+
+        else
+        {
+            _balance += request.Amount;
+            Console.WriteLine($"  [Server] Processed request {requestId[..8]}...");
+            _processedRequests[requestId] = new Response(_balance, WasDuplicate: false);
+            return new Response(_balance, WasDuplicate: false);
+        }
+        
         // TODO: Make this idempotent using the requestId!
         // 1. Check if requestId is already in _processedRequests
         //    - If yes: print "Duplicate request", return the cached Response
